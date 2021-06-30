@@ -16,7 +16,6 @@ public class Menu extends JFrame implements ActionListener {
     private JTextField et_nama;
     private JTextField et_jumlah;
     private JTextField et_harga;
-    private JTextField et_nilai;
     private JButton btn_tambah;
     private JButton btn_update;
     private JButton btn_delete;
@@ -25,12 +24,6 @@ public class Menu extends JFrame implements ActionListener {
     private JScrollPane sp_scrollTable;
     DefaultTableModel model;
     String selectedID;
-    private JButton[] buttons = {
-            btn_tambah,
-            btn_update,
-            btn_delete,
-            btn_clear
-    };
 
     public JButton getBtn_clear() {
         return btn_clear;
@@ -48,10 +41,6 @@ public class Menu extends JFrame implements ActionListener {
         return et_harga;
     }
 
-    public JTextField getEt_nilai() {
-        return et_nilai;
-    }
-
     BukuController bukuController = new BukuController();
 
     public Menu(String title) {
@@ -62,6 +51,12 @@ public class Menu extends JFrame implements ActionListener {
         this.setVisible(true);
         model = (DefaultTableModel) tb_tableData.getModel();
         bukuController.index(this);
+        JButton[] buttons = {
+                btn_tambah,
+                btn_update,
+                btn_delete,
+                btn_clear
+        };
         for (JButton button : buttons) {
             button.addActionListener(this);
         }
@@ -73,13 +68,11 @@ public class Menu extends JFrame implements ActionListener {
                         getEt_nama(),
                         getEt_jumlah(),
                         getEt_harga(),
-                        getEt_nilai()
                 };
                 ArrayList<String> data = new ArrayList<>(Arrays.asList(
                         String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 0)),
                         String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 1)),
-                        String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 2)),
-                        String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 3))
+                        String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 2))
                 ));
                 for (int i = 0; i < jTextFields.length; i++) {
                     jTextFields[i].setText(data.get(i));

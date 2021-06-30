@@ -49,7 +49,7 @@ public class BukuController {
                 menu.getEt_nama().getText(),
                 menu.getEt_jumlah().getText(),
                 menu.getEt_harga().getText(),
-                menu.getEt_nilai().getText()
+                String.valueOf(Double.parseDouble(menu.getEt_harga().getText()) * Double.parseDouble(menu.getEt_jumlah().getText()))
         ));
         try {
             buku.insert(data);
@@ -66,7 +66,7 @@ public class BukuController {
                 menu.getEt_nama().getText(),
                 menu.getEt_jumlah().getText(),
                 menu.getEt_harga().getText(),
-                menu.getEt_nilai().getText()
+                String.valueOf(Double.parseDouble(menu.getEt_harga().getText()) * Double.parseDouble(menu.getEt_jumlah().getText()))
         ));
 
         try {
@@ -95,7 +95,6 @@ public class BukuController {
                 menu.getEt_nama(),
                 menu.getEt_jumlah(),
                 menu.getEt_harga(),
-                menu.getEt_nilai()
         };
         for (JTextField button : buttons) {
             button.setText("");
@@ -109,8 +108,7 @@ public class BukuController {
         ArrayList<String> data = new ArrayList<>(Arrays.asList(
                 menu.getEt_nama().getText(),
                 menu.getEt_jumlah().getText(),
-                menu.getEt_harga().getText(),
-                menu.getEt_nilai().getText()
+                menu.getEt_harga().getText()
         ));
         for (String datum : data) {
             if (datum.equals(""))
