@@ -44,6 +44,23 @@ public class BukuController {
         }
     }
 
+    public String getClickedData(Menu menu){
+        JTextField[] jTextFields = {
+                menu.getEt_nama(),
+                menu.getEt_jumlah(),
+                menu.getEt_harga(),
+        };
+        ArrayList<String> data = new ArrayList<>(Arrays.asList(
+                String.valueOf(menu.getModelTableData().getValueAt(menu.getTb_tableData().getSelectedRow(), 0)),
+                String.valueOf(menu.getModelTableData().getValueAt(menu.getTb_tableData().getSelectedRow(), 1)),
+                String.valueOf(menu.getModelTableData().getValueAt(menu.getTb_tableData().getSelectedRow(), 2))
+        ));
+        for (int i = 0; i < jTextFields.length; i++) {
+            jTextFields[i].setText(data.get(i));
+        }
+        return String.valueOf(menu.getModelTableData().getValueAt(menu.getTb_tableData().getSelectedRow(), 0));
+    }
+
     public boolean addData(Menu menu) {
         ArrayList<String> data = new ArrayList<>(Arrays.asList(
                 menu.getEt_nama().getText(),

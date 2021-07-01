@@ -4,14 +4,11 @@ import com.maid.controllers.BukuController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Menu extends JFrame implements ActionListener {
+public class Menu extends JFrame implements ActionListener, MouseListener {
     private JPanel MainPanel;
     private JTextField et_nama;
     private JTextField et_jumlah;
@@ -24,6 +21,11 @@ public class Menu extends JFrame implements ActionListener {
     private JScrollPane sp_scrollTable;
     DefaultTableModel model;
     String selectedID;
+    Menu menu;
+
+    public JTable getTb_tableData() {
+        return tb_tableData;
+    }
 
     public JButton getBtn_clear() {
         return btn_clear;
@@ -51,6 +53,7 @@ public class Menu extends JFrame implements ActionListener {
         this.setVisible(true);
         model = (DefaultTableModel) tb_tableData.getModel();
         bukuController.index(this);
+        menu = this;
         JButton[] buttons = {
                 btn_tambah,
                 btn_update,
@@ -60,26 +63,7 @@ public class Menu extends JFrame implements ActionListener {
         for (JButton button : buttons) {
             button.addActionListener(this);
         }
-        tb_tableData.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                JTextField[] jTextFields = {
-                        getEt_nama(),
-                        getEt_jumlah(),
-                        getEt_harga(),
-                };
-                ArrayList<String> data = new ArrayList<>(Arrays.asList(
-                        String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 0)),
-                        String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 1)),
-                        String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 2))
-                ));
-                for (int i = 0; i < jTextFields.length; i++) {
-                    jTextFields[i].setText(data.get(i));
-                }
-                selectedID = String.valueOf(getModelTableData().getValueAt(tb_tableData.getSelectedRow(), 0));
-            }
-        });
+        tb_tableData.addMouseListener(this);
     }
 
     public DefaultTableModel getModelTableData() {
@@ -122,5 +106,32 @@ public class Menu extends JFrame implements ActionListener {
             return;
         }
         JOptionPane.showMessageDialog(null, "Perintah Gagal!!");
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource().equals(tb_tableData)){
+            selectedID = bukuController.getClickedData(menu);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
