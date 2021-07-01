@@ -1,9 +1,9 @@
 # ResponsiPrakPBO
 Responsi Praktikum PBO
 
-Nama : Bagus Gede Anugrah Perdana Sentosa
-NIM : 123190058
-Kelas : IF - G
+Nama : Bagus Gede Anugrah Perdana Sentosa br
+NIM : 123190058 br
+Kelas : IF - G br
 
-#Documentation
+# Documentation
 - Database yang digunakan aset_db.sql
